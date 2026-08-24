@@ -17,7 +17,7 @@
  */
 
 $DB_HOST = 'localhost';
-// $DB_NAME = 'travel_agent';
+$DB_NAME = 'travel_agent';
 $DB_USER = 'root';
 $DB_PASS = '';        // set this if your MySQL root user has a password
 

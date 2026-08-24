@@ -17,16 +17,16 @@ $__user = function_exists('current_user') && isset($pdo) ? current_user($pdo) : 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WANDERLUX travel</title>
+    <title>OLOWOLUX travel</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header class="site-header">
     <div class="container header-inner">
-        <a href="index.php" class="logo">OLOWOlux<span>Travel</span></a>
+        <a href="index.php" class="logo">OLOWOLUX<span>Travel</span></a>
         <nav>
-            <a href="index.php">Homeeee</a>
+            <a href="index.php">Home</a>
             <a href="destinations.php">Destinations</a>
             <a href="index.php#contact">Contact</a>
             <?php if ($__user): ?>

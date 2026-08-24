@@ -70,7 +70,7 @@ $featured = $stmt->fetchAll();
 
 <section id="contact" class="container">
     <h2 class="section-title">Questions? Get in Touch</h2>
-    <p>Email us at <a href="mailto:hello@wanderlux.example">hello@wanderlux.example</a> or use the booking form on any package page.</p>
+    <p>Email us at <a href="olowolux@gmail.com">olowolux@gmail</a> or use the booking form on any package page.</p>
 </section>
 
 <?php include 'includes/footer.php'; ?>
