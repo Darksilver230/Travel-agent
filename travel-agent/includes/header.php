@@ -25,6 +25,7 @@ $__user = function_exists('current_user') && isset($pdo) ? current_user($pdo) : 
         <nav>
             <a href="index.php">Home</a>
             <a href="universities.php">Universities</a>
+            <a href="services.php">Services</a>
             <a href="index.php#contact">Contact</a>
             <?php if ($__user): ?>
                 <a href="my_applications.php">My Applications</a>
