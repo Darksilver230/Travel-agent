@@ -2,21 +2,19 @@
 /**
  * index.php - Homepage
  * ---------------------
- * Shows a search form (destination + dates + travelers) and a
- * grid of featured packages pulled live from the database.
+ * Shows a search form (university/country) and a grid of featured
+ * scholarships pulled live from the database.
  */
 require 'includes/db.php';
 require 'includes/auth.php';
 include 'includes/header.php';
 
-// Fetch a few packages to feature on the homepage.
-// JOIN pulls in the destination name/country alongside each package.
 $stmt = $pdo->query("
-    SELECT packages.*, destinations.name AS destination_name, destinations.country
-    FROM packages
-    JOIN destinations ON packages.destination_id = destinations.id
-    WHERE packages.is_active = 1
-    ORDER BY packages.created_at DESC
+    SELECT scholarships.*, universities.name AS university_name, universities.country
+    FROM scholarships
+    JOIN universities ON scholarships.university_id = universities.id
+    WHERE scholarships.is_active = 1
+    ORDER BY scholarships.created_at DESC
     LIMIT 4
 ");
 $featured = $stmt->fetchAll();
@@ -24,43 +22,32 @@ $featured = $stmt->fetchAll();
 
 <section class="hero">
     <div class="container">
-        <h1>Find Your Next Adventure</h1>
-        <p>Search hundreds of curated trips and book in minutes.</p>
+        <h1>Find Your Dream Scholarship</h1>
+        <p>Browse thousands of scholarships for international students and apply in minutes.</p>
 
-        <!-- This form submits to destinations.php via GET, so the search
-             terms show up in the URL (e.g. destinations.php?q=paris)
-             and can be bookmarked/shared. -->
-        <form action="destinations.php" method="GET" class="search-form">
+        <form action="universities.php" method="GET" class="search-form">
             <div class="field">
-                <label for="q">Destination</label>
-                <input type="text" id="q" name="q" placeholder="e.g. Paris, Bali...">
+                <label for="q">University or Country</label>
+                <input type="text" id="q" name="q" placeholder="e.g. Oxford, Canada...">
             </div>
-            <div class="field">
-                <label for="travel_date">Travel Date</label>
-                <input type="date" id="travel_date" name="travel_date">
-            </div>
-            <div class="field">
-                <label for="travelers">Travelers</label>
-                <input type="number" id="travelers" name="travelers" min="1" value="2">
-            </div>
-            <button type="submit">Search Trips</button>
+            <button type="submit">Search Scholarships</button>
         </form>
     </div>
 </section>
 
 <section class="container">
-    <h2 class="section-title">Featured Packages</h2>
-    <div class="package-grid">
-        <?php foreach ($featured as $pkg): ?>
-            <div class="package-card">
-                <img src="<?php echo htmlspecialchars($pkg['image_url']); ?>" alt="<?php echo htmlspecialchars($pkg['title']); ?>">
-                <div class="package-card-body">
-                    <h3><?php echo htmlspecialchars($pkg['title']); ?></h3>
-                    <p class="muted"><?php echo htmlspecialchars($pkg['destination_name'] . ', ' . $pkg['country']); ?></p>
-                    <p><?php echo htmlspecialchars(substr($pkg['description'], 0, 90)); ?>...</p>
-                    <div class="package-card-footer">
-                        <span class="price">$<?php echo number_format($pkg['price'], 2); ?></span>
-                        <a href="package.php?id=<?php echo $pkg['id']; ?>" class="btn">View Details</a>
+    <h2 class="section-title">Featured Scholarships</h2>
+    <div class="scholarship-grid">
+        <?php foreach ($featured as $sch): ?>
+            <div class="scholarship-card">
+                <img src="<?php echo htmlspecialchars($sch['image_url']); ?>" alt="<?php echo htmlspecialchars($sch['title']); ?>">
+                <div class="scholarship-card-body">
+                    <h3><?php echo htmlspecialchars($sch['title']); ?></h3>
+                    <p class="muted"><?php echo htmlspecialchars($sch['university_name'] . ', ' . $sch['country']); ?></p>
+                    <p><?php echo htmlspecialchars(substr($sch['description'], 0, 90)); ?>...</p>
+                    <div class="scholarship-card-footer">
+                        <span class="amount">$<?php echo number_format($sch['amount'], 2); ?></span>
+                        <a href="scholarship.php?id=<?php echo $sch['id']; ?>" class="btn">View Details</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +57,7 @@ $featured = $stmt->fetchAll();
 
 <section id="contact" class="container">
     <h2 class="section-title">Questions? Get in Touch</h2>
-    <p>Email us at <a href="olowolux@gmail.com">olowolux@gmail</a> or use the booking form on any package page.</p>
+    <p>Email us at <a href="mailto:olowolux@gmail.com">olowolux@gmail.com</a> or use the application form on any scholarship page.</p>
 </section>
 
 <?php include 'includes/footer.php'; ?>

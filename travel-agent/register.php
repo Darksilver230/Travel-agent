@@ -23,7 +23,7 @@ include 'includes/header.php';
 <section class="container auth-page">
     <div class="auth-box">
         <h1>Create an Account</h1>
-        <p class="muted">You'll need an account to book a trip and manage payment.</p>
+        <p class="muted">You'll need an account to apply for scholarships and manage payments.</p>
 
         <?php if ($error): ?>
             <p class="alert error"><?php echo htmlspecialchars($error); ?></p>
