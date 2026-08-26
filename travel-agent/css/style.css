@@ -72,6 +72,32 @@ nav {
     align-items: center;
     gap: 8px;
 }
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 100;
+}
+.menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--text);
+    border-radius: 2px;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
 nav a {
     margin-left: 20px;
     text-decoration: none;
@@ -85,6 +111,47 @@ nav a {
 nav a:hover {
     color: var(--primary);
     background: rgba(26, 82, 118, 0.06);
+}
+.nav-dropdown {
+    position: relative;
+}
+.nav-dropdown-toggle {
+    cursor: pointer;
+}
+.dropdown-arrow {
+    font-size: 0.7rem;
+    margin-left: 4px;
+    transition: transform 0.2s ease;
+}
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    min-width: 180px;
+    padding: 8px 0;
+    z-index: 50;
+}
+.nav-dropdown:hover .nav-dropdown-menu {
+    display: block;
+}
+.nav-dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+.nav-dropdown-menu a {
+    display: block;
+    margin-left: 0;
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 0;
+}
+.nav-dropdown-menu a:hover {
+    background: rgba(26, 82, 118, 0.06);
+    color: var(--primary);
 }
 
 /* ---------- Hero / Search ---------- */
@@ -241,6 +308,14 @@ button:active {
 }
 
 /* ---------- Contact Section ---------- */
+.booking-section-title {
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+}
 .contact-section {
     background: var(--white);
     padding: 60px 0;
@@ -429,8 +504,51 @@ nav .nav-user {
     margin-left: 16px;
     color: var(--muted);
     font-weight: 500;
-    font-size: 0.9rem;
-    padding: 8px 0;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    white-space: nowrap;
+}
+
+/* ---------- Flash Alert ---------- */
+.flash-alert {
+    padding: 14px 0;
+    position: relative;
+    z-index: 20;
+}
+.flash-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    animation: flashSlide 0.3s ease;
+}
+.flash-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+.flash-error {
+    background: #fdeaea;
+    color: #a3312a;
+    border: 1px solid #f0c4c0;
+}
+.flash-close {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    line-height: 1;
+    padding: 0 4px;
+}
+.flash-close:hover { opacity: 1; }
+@keyframes flashSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 nav .nav-cta {
     background: var(--primary) !important;
@@ -893,11 +1011,59 @@ nav .nav-cta:hover {
 .site-footer a { color: var(--accent); text-decoration: none; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     .hero h1 { font-size: 2rem; }
     .hero { padding: 50px 0 70px; }
     .scholarship-detail-grid { grid-template-columns: 1fr; }
     .search-form { flex-direction: column; align-items: stretch; }
-    .header-inner { flex-direction: column; gap: 12px; }
-    nav { flex-wrap: wrap; justify-content: center; }
+    .header-inner { position: relative; }
+    .menu-toggle { display: block; }
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-md);
+        flex-direction: column;
+        padding: 16px 24px;
+        gap: 4px;
+    }
+    .main-nav.open { display: flex; }
+    .main-nav a {
+        margin-left: 0;
+        padding: 12px 16px;
+        width: 100%;
+        border-radius: 8px;
+    }
+    .main-nav .nav-user {
+        margin-left: 0;
+        padding: 12px 16px;
+        border-top: 1px solid var(--border);
+        margin-top: 8px;
+    }
+    .main-nav .nav-cta {
+        text-align: center;
+        display: block;
+        margin-top: 8px;
+    }
+    .nav-dropdown-menu {
+        position: static;
+        border: none;
+        box-shadow: none;
+        padding: 0 0 0 20px;
+        min-width: auto;
+        display: none;
+    }
+    .nav-dropdown.open .nav-dropdown-menu {
+        display: block;
+    }
+    .nav-dropdown-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .contact-grid { flex-direction: column; gap: 24px; }
 }

@@ -7,6 +7,30 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
+    var menuToggle = document.querySelector('.menu-toggle');
+    var mainNav = document.querySelector('.main-nav');
+    if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function () {
+            this.classList.toggle('active');
+            mainNav.classList.toggle('open');
+        });
+        mainNav.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('open');
+            });
+        });
+    }
+
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                this.parentElement.classList.toggle('open');
+            }
+        });
+    });
+
     // Prevent picking a date in the past on any date input.
     const today = new Date().toISOString().split('T')[0];
     document.querySelectorAll('input[type="date"]').forEach(function (input) {

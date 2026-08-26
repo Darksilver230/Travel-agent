@@ -186,34 +186,4 @@ $destCount = $pdo->query("SELECT COUNT(*) FROM destinations")->fetchColumn();
     </div>
 </section>
 
-<section id="contact" class="contact-section">
-    <div class="container">
-        <h2 class="section-title">Get in Touch</h2>
-        <p class="contact-text">Planning your next trip or have questions about scholarships? We'd love to hear from you. Whether it's a weekend getaway or an international adventure, our team is ready to help you every step of the way.</p>
-        <div class="contact-grid">
-            <div class="contact-item">
-                <span class="contact-icon">&#9993;</span>
-                <div>
-                    <h4>Email</h4>
-                    <p>olowocorp@gmail.com</p>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">&#9743;</span>
-                <div>
-                    <h4>Phone</h4>
-                    <p>09064501644</p>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">&#9873;</span>
-                <div>
-                    <h4>Address</h4>
-                    <p>Akure, Ondo State</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <?php include 'includes/footer.php'; ?>

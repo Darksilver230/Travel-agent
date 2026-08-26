@@ -42,5 +42,11 @@ if (!$user || !password_verify($password, $user['password_hash'])) {
 
 $_SESSION['user_id'] = $user['id'];
 
+$stmt = $pdo->prepare("SELECT full_name FROM users WHERE id = ?");
+$stmt->execute([$user['id']]);
+$name = $stmt->fetchColumn();
+$_SESSION['flash'] = 'Welcome back, ' . htmlspecialchars(explode(' ', $name)[0]) . '!';
+$_SESSION['flash_type'] = 'success';
+
 header('Location: ' . $redirect);
 exit;

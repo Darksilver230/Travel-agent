@@ -60,5 +60,8 @@ $stmt->execute([$full_name, $email, $password_hash, $phone]);
 // Log the new user in immediately by storing their id in the session.
 $_SESSION['user_id'] = $pdo->lastInsertId();
 
+$_SESSION['flash'] = 'Welcome, ' . htmlspecialchars(explode(' ', $full_name)[0]) . '! Your account has been created.';
+$_SESSION['flash_type'] = 'success';
+
 header('Location: ' . $redirect);
 exit;
