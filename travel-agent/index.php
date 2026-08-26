@@ -2,41 +2,48 @@
 /**
  * index.php - Homepage
  * ---------------------
- * Scholarship platform homepage with hero, stats, how it works,
- * featured scholarships, and a call-to-action.
+ * Dual-purpose homepage: scholarships + travel plans.
  */
 require 'includes/db.php';
 require 'includes/auth.php';
 include 'includes/header.php';
 
-$stmt = $pdo->query("
+// Featured scholarships
+$schStmt = $pdo->query("
     SELECT scholarships.*, universities.name AS university_name, universities.country
     FROM scholarships
     JOIN universities ON scholarships.university_id = universities.id
     WHERE scholarships.is_active = 1
     ORDER BY scholarships.amount DESC
-    LIMIT 6
+    LIMIT 3
 ");
-$featured = $stmt->fetchAll();
+$featuredScholarships = $schStmt->fetchAll();
+
+// Featured travel packages
+$tripStmt = $pdo->query("
+    SELECT packages.*, destinations.name AS destination_name, destinations.country
+    FROM packages
+    JOIN destinations ON packages.destination_id = destinations.id
+    WHERE packages.is_active = 1
+    ORDER BY packages.price ASC
+    LIMIT 3
+");
+$featuredTrips = $tripStmt->fetchAll();
 
 $uniCount = $pdo->query("SELECT COUNT(*) FROM universities")->fetchColumn();
 $schCount = $pdo->query("SELECT COUNT(*) FROM scholarships WHERE is_active = 1")->fetchColumn();
+$destCount = $pdo->query("SELECT COUNT(*) FROM destinations")->fetchColumn();
 ?>
 
 <section class="hero">
     <div class="container">
         <div class="hero-content">
-            <span class="hero-badge">Trusted by 10,000+ Students Worldwide</span>
-            <h1>Your Gateway to World-Class Scholarships</h1>
-            <p>We help international students find, apply for, and secure scholarships at top universities across the globe. From expert guidance to application support — we are with you every step of the way.</p>
-
-            <form action="universities.php" method="GET" class="search-form">
-                <div class="field">
-                    <label for="q">Search by University or Country</label>
-                    <input type="text" id="q" name="q" placeholder="e.g. Oxford, Canada, Japan...">
-                </div>
-                <button type="submit">Search Scholarships</button>
-            </form>
+            <span class="hero-badge">Your Gateway to Education & Adventure</span>
+            <h1>Unlock Your Next Possibility<br>Beyond Limits,Beyond Borders.</h1>
+            <p>We help international students find scholarships at top universities, and explore the world with curated travel plans. One platform, two possibilities.</p>            <div class="hero-tabs">
+                <a href="universities.php" class="hero-tab hero-tab-active">Browse Scholarships</a>
+                <a href="travel.php" class="hero-tab">Explore Travel Plans</a>
+            </div>
         </div>
     </div>
 </section>
@@ -52,8 +59,8 @@ $schCount = $pdo->query("SELECT COUNT(*) FROM scholarships WHERE is_active = 1")
             <span class="stat-label">Active Scholarships</span>
         </div>
         <div class="stat">
-            <span class="stat-number">50+</span>
-            <span class="stat-label">Countries Covered</span>
+            <span class="stat-number"><?php echo $destCount; ?>+</span>
+            <span class="stat-label">Destinations</span>
         </div>
         <div class="stat">
             <span class="stat-number">95%</span>
@@ -63,35 +70,12 @@ $schCount = $pdo->query("SELECT COUNT(*) FROM scholarships WHERE is_active = 1")
 </section>
 
 <section class="container">
-    <h2 class="section-title">How It Works</h2>
-    <div class="steps-grid">
-        <div class="step-card">
-            <div class="step-number">1</div>
-            <h3>Browse Scholarships</h3>
-            <p>Explore our curated list of scholarships from top universities around the world. Filter by country, field of study, or amount.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-number">2</div>
-            <h3>Apply Online</h3>
-            <p>Found the right scholarship? Submit your application directly through our platform. Upload documents and track your progress in one place.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-number">3</div>
-            <h3>Get Expert Support</h3>
-            <p>Our advisors review your application, help with essays, and prepare you for interviews to maximize your chances of acceptance.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-number">4</div>
-            <h3>Start Your Journey</h3>
-            <p>Once accepted, we help with visa applications, accommodation, and everything else you need to begin your academic journey abroad.</p>
-        </div>
+    <div class="section-header">
+        <h2 class="section-title">Featured Scholarships</h2>
+        <a href="universities.php" class="section-link">View All &rarr;</a>
     </div>
-</section>
-
-<section class="container">
-    <h2 class="section-title">Featured Scholarships</h2>
     <div class="scholarship-grid">
-        <?php foreach ($featured as $sch): ?>
+        <?php foreach ($featuredScholarships as $sch): ?>
             <div class="scholarship-card">
                 <img src="<?php echo htmlspecialchars($sch['image_url']); ?>" alt="<?php echo htmlspecialchars($sch['title']); ?>">
                 <div class="scholarship-card-body">
@@ -110,8 +94,58 @@ $schCount = $pdo->query("SELECT COUNT(*) FROM scholarships WHERE is_active = 1")
             </div>
         <?php endforeach; ?>
     </div>
-    <div style="text-align:center; margin-bottom: 48px;">
-        <a href="universities.php" class="btn">View All Scholarships</a>
+</section>
+
+<section class="container">
+    <div class="section-header">
+        <h2 class="section-title">Popular Travel Plans</h2>
+        <a href="travel.php" class="section-link">View All &rarr;</a>
+    </div>
+    <div class="scholarship-grid">
+        <?php foreach ($featuredTrips as $pkg): ?>
+            <div class="scholarship-card">
+                <img src="<?php echo htmlspecialchars($pkg['image_url']); ?>" alt="<?php echo htmlspecialchars($pkg['title']); ?>">
+                <div class="scholarship-card-body">
+                    <span class="scholarship-badge"><?php echo htmlspecialchars($pkg['country']); ?></span>
+                    <h3><?php echo htmlspecialchars($pkg['title']); ?></h3>
+                    <p class="muted"><?php echo htmlspecialchars($pkg['destination_name']); ?></p>
+                    <p><?php echo $pkg['duration_days']; ?> days &middot; up to <?php echo $pkg['max_travelers']; ?> travelers</p>
+                    <div class="scholarship-card-footer">
+                        <div>
+                            <span class="amount">$<?php echo number_format($pkg['price'], 2); ?></span>
+                            <span class="muted">per person</span>
+                        </div>
+                        <a href="trip.php?id=<?php echo $pkg['id']; ?>" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+<section class="container">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Browse & Choose</h3>
+            <p>Explore scholarships from top universities or curated travel plans to exciting destinations.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Apply or Book</h3>
+            <p>Submit your scholarship application or book your dream trip directly through our platform.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Get Expert Support</h3>
+            <p>Our advisors help with applications, essays, visa guidance, and travel arrangements.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <h3>Achieve Your Goals</h3>
+            <p>Whether it is a scholarship or a dream trip, we help make it happen.</p>
+        </div>
     </div>
 </section>
 
@@ -121,33 +155,63 @@ $schCount = $pdo->query("SELECT COUNT(*) FROM scholarships WHERE is_active = 1")
         <div class="feature-card">
             <div class="feature-icon">🎯</div>
             <h3>Personalized Matching</h3>
-            <p>We match you with scholarships that fit your academic profile, background, and goals — so you only apply where you have the best chance.</p>
+            <p>We match you with scholarships and travel plans that fit your profile, budget, and goals.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">👩‍🎓</div>
             <h3>Expert Advisors</h3>
-            <p>Our team has helped thousands of students secure scholarships at universities like Oxford, MIT, and the University of Tokyo.</p>
+            <p>Our team has helped thousands of students secure scholarships and book unforgettable trips.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">📄</div>
-            <h3>Application Support</h3>
-            <p>From essay reviews to document preparation, we make sure your application is polished and submission-ready.</p>
+            <h3>End-to-End Support</h3>
+            <p>From application reviews to visa guidance and travel planning — we handle it all.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">💰</div>
-            <h3>Affordable Fees</h3>
-            <p>Our service fees are transparent with no hidden costs. We only charge when your application is successful.</p>
+            <h3>Affordable & Transparent</h3>
+            <p>No hidden fees. Scholarship advisory and travel booking at competitive prices.</p>
         </div>
     </div>
 </section>
 
 <section class="container">
     <div class="cta-box">
-        <h2>Ready to Study Abroad?</h2>
-        <p>Join thousands of international students who have already secured their dream scholarships. Start your journey today.</p>
+        <h2>Ready to Start Your Journey?</h2>
+        <p>Whether you are seeking a world-class scholarship or planning your next adventure, we are here to help.</p>
         <div class="cta-buttons">
             <a href="universities.php" class="btn btn-accent">Browse Scholarships</a>
-            <a href="services.php" class="btn btn-outline">Our Services</a>
+            <a href="travel.php" class="btn btn-outline">Explore Travel Plans</a>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="contact-text">Planning your next trip or have questions about scholarships? We'd love to hear from you. Whether it's a weekend getaway or an international adventure, our team is ready to help you every step of the way.</p>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <span class="contact-icon">&#9993;</span>
+                <div>
+                    <h4>Email</h4>
+                    <p>olowocorp@gmail.com</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">&#9743;</span>
+                <div>
+                    <h4>Phone</h4>
+                    <p>09064501644</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">&#9873;</span>
+                <div>
+                    <h4>Address</h4>
+                    <p>Akure, Ondo State</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>

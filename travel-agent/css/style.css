@@ -89,7 +89,8 @@ nav a:hover {
 
 /* ---------- Hero / Search ---------- */
 .hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 60%, #082a3e 100%);
+    background: linear-gradient(135deg, rgba(8,42,62,0.4), rgba(8,42,62,0.5)),
+                url('../img/airplane.jpg') center 80%/cover no-repeat;
     color: var(--white);
     padding: 80px 0 100px;
     text-align: center;
@@ -212,6 +213,73 @@ button:active {
     height: 3px;
     background: var(--accent);
     border-radius: 2px;
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.section-header .section-title {
+    margin: 48px 0 28px;
+}
+.section-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 8px 18px;
+    border: 2px solid var(--accent);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+.section-link:hover {
+    background: var(--accent);
+    color: var(--white);
+}
+
+/* ---------- Contact Section ---------- */
+.contact-section {
+    background: var(--white);
+    padding: 60px 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--border);
+}
+.contact-text {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+}
+.contact-grid {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    flex: 1;
+    min-width: 200px;
+}
+.contact-icon {
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin-top: 2px;
+}
+.contact-item h4 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    color: var(--text);
+}
+.contact-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
 }
 
 /* ---------- Scholarship grid/cards ---------- */
@@ -527,6 +595,40 @@ nav .nav-cta:hover {
     padding: 8px 20px;
     border-radius: 30px;
     margin-bottom: 20px;
+}
+
+.hero-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+    position: relative;
+}
+.hero-tab {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.hero-tab:hover {
+    background: rgba(255,255,255,0.25);
+    color: var(--white);
+}
+.hero-tab-active {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+}
+.hero-tab-active:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: var(--white);
 }
 
 /* ---------- Homepage: Stats bar ---------- */
