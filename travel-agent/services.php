@@ -67,7 +67,7 @@ $services = [
     <div class="cta-box">
         <h2>Ready to Get Started?</h2>
         <p>Book a free consultation with one of our scholarship advisors today and take the first step toward your dream education.</p>
-        <a href="index.php#contact" class="btn">Contact Us</a>
+        <a href="contact.php" class="btn">Contact Us</a>
     </div>
 </section>
 

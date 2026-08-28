@@ -39,8 +39,9 @@ $destCount = $pdo->query("SELECT COUNT(*) FROM destinations")->fetchColumn();
     <div class="container">
         <div class="hero-content">
             <span class="hero-badge">Your Gateway to Education & Adventure</span>
-            <h1>Unlock Your Next Possibility<br>Beyond Limits,Beyond Borders.</h1>
-            <p>We help international students find scholarships at top universities, and explore the world with curated travel plans. One platform, two possibilities.</p>            <div class="hero-tabs">
+            <h1>Unlock Your Next Possibility<br>Beyond Limits, Beyond Borders.</h1>
+            <p>We help international students find scholarships at top universities, and explore the world with curated travel plans. One platform, two possibilities.</p>
+            <div class="hero-tabs">
                 <a href="universities.php" class="hero-tab hero-tab-active">Browse Scholarships</a>
                 <a href="travel.php" class="hero-tab">Explore Travel Plans</a>
             </div>

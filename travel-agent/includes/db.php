@@ -129,6 +129,41 @@ try {
         )
     ");
 
+    // Seed sample data so a fresh install isn't blank. Skips if the
+    // tables already have content (e.g. after schema.sql import).
+    $uniCount = (int)$pdo->query("SELECT COUNT(*) FROM universities")->fetchColumn();
+    if ($uniCount === 0) {
+        $pdo->exec("
+            INSERT INTO universities (name, country, description, image_url) VALUES
+            ('University of Oxford', 'United Kingdom', 'One of the oldest and most prestigious universities in the world.', 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800'),
+            ('MIT', 'USA', 'Leading institution in science, engineering, and technology.', 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=800'),
+            ('University of Toronto', 'Canada', 'Canada top research university with generous scholarships.', 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'),
+            ('University of Melbourne', 'Australia', 'Leading Australian university with generous scholarship programs.', 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800')
+        ");
+        $pdo->exec("
+            INSERT INTO scholarships (university_id, title, description, amount, duration_months, max_applicants, image_url, deadline_from, deadline_to) VALUES
+            (1, 'Oxford Clarendon Fund Scholarship', 'Fully-funded scholarship covering tuition, living expenses, and travel for graduate students.', 45000.00, 24, 50, 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800', '2026-09-01', '2027-06-30'),
+            (2, 'MIT International Science Scholars', 'Merit-based scholarship for outstanding international students in STEM.', 52000.00, 48, 30, 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=800', '2026-09-01', '2027-06-30'),
+            (3, 'UofT Lester B. Pearson Scholarship', 'Full scholarship for international students demonstrating exceptional achievement.', 40000.00, 48, 40, 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800', '2026-09-01', '2027-06-30')
+        ");
+    }
+
+    $destCount = (int)$pdo->query("SELECT COUNT(*) FROM destinations")->fetchColumn();
+    if ($destCount === 0) {
+        $pdo->exec("
+            INSERT INTO destinations (name, country, description, image_url) VALUES
+            ('Paris', 'France', 'The City of Light — iconic landmarks, world-class food, and art.', 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800'),
+            ('Bali', 'Indonesia', 'Tropical beaches, rice terraces, and vibrant culture.', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800'),
+            ('Tokyo', 'Japan', 'Neon skylines, ancient temples, and world-class cuisine.', 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800')
+        ");
+        $pdo->exec("
+            INSERT INTO packages (destination_id, title, description, price, duration_days, max_travelers, image_url, available_from, available_to) VALUES
+            (1, '5-Day Paris Getaway', 'Eiffel Tower, Louvre, Seine river cruise, and guided walking tours.', 1200.00, 5, 12, 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800', '2026-09-01', '2027-06-30'),
+            (2, '7-Day Bali Escape', 'Beach resorts, temple visits, and a sunrise volcano trek.', 1450.00, 7, 15, 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800', '2026-09-01', '2027-06-30'),
+            (3, '6-Day Tokyo Discovery', 'Shibuya, Mt. Fuji day trip, sushi-making class, and temple tours.', 1850.00, 6, 14, 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800', '2026-09-01', '2027-06-30')
+        ");
+    }
+
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }

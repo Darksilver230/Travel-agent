@@ -11,7 +11,8 @@ $__user = function_exists('current_user') && isset($pdo) ? current_user($pdo) : 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarships & Travel</title>
+    <title>OLOWO Corp — Scholarships & Travel</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a5276'/><text x='50' y='70' font-size='60' font-family='Arial' font-weight='bold' text-anchor='middle' fill='%23d4a843'>O</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -37,7 +38,6 @@ $__user = function_exists('current_user') && isset($pdo) ? current_user($pdo) : 
                     <a href="services.php">All Services</a>
                 </div>
             </div>
-            <a href="index.php#contact">Contact</a>
             <?php if ($__user): ?>
                 <a href="my_bookings.php">My Bookings</a>
                 <a href="logout.php">Log Out</a>

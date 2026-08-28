@@ -1,5 +1,5 @@
 /* ==========================================================
-   OLOWOLUX Scholarships - Stylesheet
+   OLOWO corp - Stylesheet
    ========================================================== */
 
 :root {
@@ -1009,6 +1009,8 @@ nav .nav-cta:hover {
     font-size: 0.9rem;
 }
 .site-footer a { color: var(--accent); text-decoration: none; }
+.site-footer .footer-links { margin-bottom: 10px; }
+.site-footer .footer-links a { margin: 0 10px; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {

@@ -7,6 +7,7 @@
  */
 require 'includes/db.php';
 require 'includes/auth.php';
+require 'includes/mailer.php';
 require 'includes/payment_config.php';
 require_login();
 
@@ -42,6 +43,17 @@ if ($paid) {
         WHERE id = ? AND user_id = ?
     ");
     $stmt->execute([$session_id, $id, $_SESSION['user_id']]);
+
+    $user = current_user($pdo);
+    if ($user) {
+        $label = ($type === 'trip') ? 'booking' : 'application';
+        $subject = 'Payment Confirmed - ' . ucfirst($label) . ' #' . $id;
+        $body  = 'Hi ' . $user['full_name'] . ",\n\n";
+        $body .= "Your payment for $label #$id has been received and confirmed.\n";
+        $body .= 'Thank you — your ' . $label . ' is now confirmed.';
+        $body .= email_footer();
+        send_email($user['email'], $subject, $body);
+    }
 }
 
 $success_page = ($type === 'trip') ? 'my_trips.php' : 'my_applications.php';

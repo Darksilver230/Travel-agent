@@ -36,7 +36,7 @@ $results = $stmt->fetchAll();
 <section class="hero hero-travel">
     <div class="container">
         <h1>Explore Travel Plans</h1>
-        <p>Curated trips to the world most beautiful destinations. Book your next adventure today.</p>
+        <p>Curated trips to the world's most beautiful destinations. Book your next adventure today.</p>
 
         <form action="travel.php" method="GET" class="search-form">
             <div class="field">

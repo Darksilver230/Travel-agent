@@ -1,4 +1,4 @@
-# Wanderlux Travel — Starter Website
+#OLOWO Corp — Starter Website
 
 A working travel-booking website: create an account, search packages,
 book a trip, and pay by card (Stripe) or bank transfer.
@@ -23,8 +23,9 @@ travel-agent/
 ├── process_payment.php          Records a bank transfer reference
 │
 ├── includes/
-│   ├── db.php                    Database connection (PDO)
+│   ├── db.php                    Database connection (PDO) + auto-seeds sample data
 │   ├── auth.php                  Session/login helper functions
+│   ├── mailer.php                Transactional email helper (booking/payment confirmations)
 │   ├── payment_config.php        Stripe keys + bank transfer details (EDIT THIS)
 │   ├── header.php                 Shared <head> + nav (shows login state)
 │   └── footer.php                 Shared footer
@@ -109,7 +110,10 @@ Stripe keys) → check `my_bookings.php`.
 - **Stripe webhook**: a more bulletproof way to confirm card payments
   even if the customer closes the tab before `payment_success.php`
   loads (Stripe calls your server directly when a payment completes)
-- **Email confirmations**: send a real email on successful booking/payment
+- **Configure real email sending**: transactional emails are sent via
+  `includes/mailer.php` using PHP's `mail()`. On XAMPP this needs an SMTP
+  agent (e.g. Mercury) or php.ini SMTP settings — see the notes at the
+  top of `mailer.php`.
 - **"Forgot password" flow**: currently there's no password reset
 - **Booking cancellation**: let users cancel an unpaid booking
 

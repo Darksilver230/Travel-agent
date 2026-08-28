@@ -8,6 +8,7 @@
  */
 require 'includes/db.php';
 require 'includes/auth.php';
+require 'includes/mailer.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
@@ -56,6 +57,20 @@ $stmt = $pdo->prepare("
 ");
 $stmt->execute([$scholarship_id, $user_id, $num_applicants, $deadline_date, $total_fee, $special_requests]);
 $application_id = $pdo->lastInsertId();
+
+$user = current_user($pdo);
+if ($user) {
+    $subject = 'Application Received - ' . $sch['title'];
+    $body  = 'Hi ' . $user['full_name'] . ",\n\n";
+    $body .= 'Thank you for applying to: ' . $sch['title'] . "\n";
+    $body .= 'Preferred start date: ' . $deadline_date . "\n";
+    $body .= 'Application ID: #' . $application_id . "\n";
+    $body .= 'Applicants: ' . $num_applicants . "\n";
+    $body .= 'Total fee due: $' . number_format($total_fee, 2) . "\n\n";
+    $body .= 'A payment of the application fee is required to complete your application.';
+    $body .= email_footer();
+    send_email($user['email'], $subject, $body);
+}
 
 header("Location: payment.php?application_id=$application_id");
 exit;

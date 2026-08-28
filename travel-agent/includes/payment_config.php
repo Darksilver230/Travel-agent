@@ -21,7 +21,7 @@ define('STRIPE_SECRET_KEY', '');       // e.g. 'sk_test_51AbCdEf...'
 define('STRIPE_PUBLISHABLE_KEY', '');  // e.g. 'pk_test_51AbCdEf...'
 
 define('BANK_TRANSFER_DETAILS', [
-    'account_name'   => 'OLOWOLUX Scholarships Ltd',
+    'account_name'   => 'OLOWO Corp',
     'account_number' => '9064501644',
     'sort_code'      => '12-34-56',
     'bank_name'      => 'OPAY',

@@ -7,6 +7,7 @@
  */
 require 'includes/db.php';
 require 'includes/auth.php';
+require 'includes/mailer.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: travel.php');
@@ -55,6 +56,20 @@ $stmt = $pdo->prepare("
 ");
 $stmt->execute([$package_id, $user_id, $num_travelers, $travel_date, $total_price, $special_requests]);
 $booking_id = $pdo->lastInsertId();
+
+$user = current_user($pdo);
+if ($user) {
+    $subject = 'Booking Received - ' . $pkg['title'];
+    $body  = 'Hi ' . $user['full_name'] . ",\n\n";
+    $body .= 'Thank you for booking: ' . $pkg['title'] . "\n";
+    $body .= 'Travel date: ' . $travel_date . "\n";
+    $body .= 'Booking ID: #' . $booking_id . "\n";
+    $body .= 'Travelers: ' . $num_travelers . "\n";
+    $body .= 'Total due: $' . number_format($total_price, 2) . "\n\n";
+    $body .= 'A payment of the booking total is required to confirm your trip.';
+    $body .= email_footer();
+    send_email($user['email'], $subject, $body);
+}
 
 header("Location: payment.php?type=trip&id=$booking_id");
 exit;

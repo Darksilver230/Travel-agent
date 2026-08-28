@@ -1,5 +1,5 @@
 -- =========================================================
--- OLOWOLUX - Scholarships & Travel Platform - Database Schema
+-- OLOWO Corp - Scholarships & Travel Platform - Database Schema
 -- =========================================================
 -- HOW TO USE:
 -- 1. Open phpMyAdmin (comes with XAMPP/MAMP) or the mysql CLI
