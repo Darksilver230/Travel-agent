@@ -31,7 +31,7 @@ $applicationError = $_GET['error'] ?? null;
 $user = current_user($pdo);
 ?>
 
-<section class="container scholarship-detail">
+<section class="container scholarship-detail page-top">
     <a href="universities.php" class="back-link">&larr; Back to all scholarships</a>
 
     <div class="scholarship-detail-grid">

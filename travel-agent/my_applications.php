@@ -32,7 +32,7 @@ function status_label(string $status): string {
 }
 ?>
 
-<section class="container">
+<section class="container page-top">
     <h1 class="section-title">My Applications</h1>
 
     <?php if (empty($applications)): ?>

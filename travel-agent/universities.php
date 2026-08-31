@@ -34,7 +34,7 @@ $stmt->execute($params);
 $results = $stmt->fetchAll();
 ?>
 
-<section class="container">
+<section class="container page-top">
     <h1 class="section-title">
         <?php echo $q !== '' ? 'Results for "' . htmlspecialchars($q) . '"' : 'All Scholarships'; ?>
     </h1>

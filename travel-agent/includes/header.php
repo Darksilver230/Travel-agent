@@ -20,15 +20,18 @@ $__user = function_exists('current_user') && isset($pdo) ? current_user($pdo) : 
 </head>
 <body>
 
-<header class="site-header">
-    <div class="container header-inner">
-        <a href="index.php" class="logo">OLOWO Corp</a>
-        <button class="menu-toggle" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav class="main-nav">
+<header class="navbar">
+    <a href="index.php" class="logo">
+        <span class="logo-circle"><img src="img/logo.jpg" alt="OLOWO Corp Logo" class="logo-img"></span>
+        OLOWO Corp
+    </a>
+    <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <nav class="main-nav">
+        <div class="nav-links">
             <a href="index.php">Home</a>
             <div class="nav-dropdown">
                 <a href="services.php" class="nav-dropdown-toggle">Services <span class="dropdown-arrow">&#9662;</span></a>
@@ -38,15 +41,21 @@ $__user = function_exists('current_user') && isset($pdo) ? current_user($pdo) : 
                     <a href="services.php">All Services</a>
                 </div>
             </div>
-            <?php if ($__user): ?>
+            <a href="about.php">About Us</a>
+            <a href="contact.php">Contact</a>
+        </div>
+        <?php if ($__user): ?>
+            <div class="nav-links">
                 <a href="my_bookings.php">My Bookings</a>
-                <a href="logout.php">Log Out</a>
-            <?php else: ?>
-                <a href="login.php">Log In</a>
-                <a href="register.php" class="nav-cta">Sign Up</a>
-            <?php endif; ?>
-        </nav>
-    </div>
+                <a href="logout.php" class="cta-pill">Log Out</a>
+            </div>
+        <?php else: ?>
+            <div class="nav-cta-group">
+                <a href="login.php" class="nav-login">Log In</a>
+                <a href="register.php" class="cta-pill">Sign Up</a>
+            </div>
+        <?php endif; ?>
+    </nav>
 </header>
 
 <?php if (!empty($_SESSION['flash'])): ?>

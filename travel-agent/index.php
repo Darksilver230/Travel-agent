@@ -35,7 +35,10 @@ $schCount = $pdo->query("SELECT COUNT(*) FROM scholarships WHERE is_active = 1")
 $destCount = $pdo->query("SELECT COUNT(*) FROM destinations")->fetchColumn();
 ?>
 
-<section class="hero">
+<section class="hero hero-with-video">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="img/airplane.mp4" type="video/mp4">
+    </video>
     <div class="container">
         <div class="hero-content">
             <span class="hero-badge">Your Gateway to Education & Adventure</span>
@@ -151,27 +154,28 @@ $destCount = $pdo->query("SELECT COUNT(*) FROM destinations")->fetchColumn();
 </section>
 
 <section class="container">
-    <h2 class="section-title">Why Students Choose Us</h2>
+    <h2 class="section-title">Why Choose Us?</h2>
     <div class="features-grid">
         <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Personalized Matching</h3>
-            <p>We match you with scholarships and travel plans that fit your profile, budget, and goals.</p>
+            <div class="feature-icon">🤝</div>
+            <div>
+                <h3>Human-Centric Approach</h3>
+                <p>We believe in building connections, not just booking flights. Your journey is our priority, from the first call to your return home.</p>
+            </div>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">👩‍🎓</div>
-            <h3>Expert Advisors</h3>
-            <p>Our team has helped thousands of students secure scholarships and book unforgettable trips.</p>
+            <div class="feature-icon">🧭</div>
+            <div>
+                <h3>Unmatched Expertise</h3>
+                <p>Our team of travel experts has a passion for discovery and the knowledge to unlock hidden gems and exclusive experiences.</p>
+            </div>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">📄</div>
-            <h3>End-to-End Support</h3>
-            <p>From application reviews to visa guidance and travel planning — we handle it all.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">💰</div>
-            <h3>Affordable & Transparent</h3>
-            <p>No hidden fees. Scholarship advisory and travel booking at competitive prices.</p>
+            <div class="feature-icon">✈️</div>
+            <div>
+                <h3>Effortless &amp; Secure</h3>
+                <p>Travel should be a pleasure, not a puzzle. We handle every detail so you can focus on creating unforgettable memories.</p>
+            </div>
         </div>
     </div>
 </section>

@@ -29,7 +29,7 @@ $bookingError = $_GET['error'] ?? null;
 $user = current_user($pdo);
 ?>
 
-<section class="container scholarship-detail">
+<section class="container scholarship-detail page-top">
     <a href="travel.php" class="back-link">&larr; Back to all trips</a>
 
     <div class="scholarship-detail-grid">

@@ -118,6 +118,22 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- =========================================================
+-- CONTACT SUBMISSIONS TABLE
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS contact_submissions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    destination VARCHAR(150) DEFAULT NULL,
+    travel_date DATE DEFAULT NULL,
+    num_travelers INT DEFAULT 1,
+    travel_type ENUM('vacation','business','study','family','other') DEFAULT 'other',
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =========================================================
 -- Sample Data: Scholarships
 -- =========================================================
 

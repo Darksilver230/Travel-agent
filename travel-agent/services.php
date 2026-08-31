@@ -2,8 +2,7 @@
 /**
  * services.php
  * -------------
- * Shows the services we offer to help international students
- * with their scholarship journey.
+ * Shows the travel and advisory services we offer.
  */
 require 'includes/db.php';
 require 'includes/auth.php';
@@ -12,33 +11,23 @@ include 'includes/header.php';
 $services = [
     [
         'icon' => '📋',
-        'title' => 'Expert Scholarship Advice',
-        'description' => 'One-on-one consultation with experienced advisors who will guide you through the entire scholarship process, from choosing the right programs to submitting winning applications.',
+        'title' => 'Personalized Itineraries',
+        'description' => 'We take the time to understand your interests and preferences to create a travel experience that\'s uniquely yours.',
     ],
     [
-        'icon' => '📝',
-        'title' => 'Document Review',
-        'description' => 'Our team will review your transcripts, certificates, and supporting documents to ensure they meet the requirements of your chosen universities and scholarship programs.',
-    ],
-    [
-        'icon' => '✍️',
-        'title' => 'Essay & Personal Statement Help',
-        'description' => 'Get professional feedback on your scholarship essays and personal statements. We help you craft compelling narratives that stand out from thousands of applicants.',
-    ],
-    [
-        'icon' => '🎤',
-        'title' => 'Interview Preparation',
-        'description' => 'Mock interviews and coaching sessions to prepare you for scholarship interviews. Learn how to present yourself confidently and answer common questions effectively.',
+        'icon' => '💡',
+        'title' => 'Expert Advice',
+        'description' => 'Our travel consultants are well-versed in a multitude of destinations and are always up to date with the latest travel trends, ensuring you receive the best recommendations.',
     ],
     [
         'icon' => '🌍',
-        'title' => 'Visa Application Support',
-        'description' => 'Step-by-step guidance on student visa applications for your destination country. We help you prepare all required documents and avoid common mistakes.',
+        'title' => 'Comprehensive Services',
+        'description' => 'From visa application to flights and accommodations down to excursions and local experiences, we handle all aspects of your travel plans, leaving you free to enjoy your adventures.',
     ],
     [
-        'icon' => '🏠',
-        'title' => 'Accommodation Assistance',
-        'description' => 'Help finding safe and affordable housing near your university. We connect you with verified accommodations and provide tips for settling into your new city.',
+        'icon' => '📞',
+        'title' => '24/7 Support',
+        'description' => 'Travel is unpredictable, and we are here for you at any time, providing support and solutions whenever you need them.',
     ],
 ];
 ?>
@@ -46,12 +35,12 @@ $services = [
 <section class="hero">
     <div class="container">
         <h1>Our Services</h1>
-        <p>Everything you need to secure your scholarship and start your academic journey abroad.</p>
+        <p>Everything you need to plan and enjoy a seamless travel experience.</p>
     </div>
 </section>
 
 <section class="container">
-    <h2 class="section-title">How We Help You Succeed</h2>
+    <h2 class="section-title">How We Help You Travel Better</h2>
     <div class="services-grid">
         <?php foreach ($services as $service): ?>
             <div class="service-card">
@@ -66,7 +55,7 @@ $services = [
 <section class="container">
     <div class="cta-box">
         <h2>Ready to Get Started?</h2>
-        <p>Book a free consultation with one of our scholarship advisors today and take the first step toward your dream education.</p>
+        <p>Reach out to us today and let us help you plan your next unforgettable adventure.</p>
         <a href="contact.php" class="btn">Contact Us</a>
     </div>
 </section>
